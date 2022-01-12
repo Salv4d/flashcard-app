@@ -39,7 +39,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: space-around;
-  height: 76vh;
 }
 
 #card {
@@ -157,4 +156,5 @@ button:hover {
 footer {
   text-align: center;
   font-size: 0.7em;
+  margin: 30px;
 }
