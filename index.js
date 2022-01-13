@@ -67,6 +67,7 @@ class Card {
     const word = this.words[wordPick];
     this.discard(wordPick);
     this.currentWord = word;
+    this.showCard();
   }
 
   showCard() {
@@ -123,15 +124,21 @@ class Card {
     return word;
   }
 
-  revealAnswer() {}
+  revealAnswer() {
+    const correctWord = document.querySelector(`#${this.currentWord.key}`);
+    correctWord.classList.add("correct");
+  }
 
-  validateChoice(choice) {
+  correctAnswer(choice) {
     return choice === this.currentWord.key;
   }
 
   enableNextButton() {}
 
-  skip() {}
+  skip() {
+    this.results.skipped++;
+    this.new();
+  }
 
   next() {}
 
@@ -140,12 +147,20 @@ class Card {
 
 card = new Card(words);
 
-card.showCard(card.new());
+card.new();
 
 const options = document.querySelectorAll(".option");
 
 for (let option of options) {
   option.addEventListener("click", function (e) {
-    card.validateChoice(this.id);
+    if (card.correctAnswer(this.id)) {
+      card.results.correct++;
+    } else {
+      card.results.wrong++;
+      card.revealAnswer();
+      this.classList.toggle("wrong");
+    }
+
+    console.log(card.results);
   });
 }
