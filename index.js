@@ -126,7 +126,7 @@ class Card {
   revealAnswer() {}
 
   validateChoice(choice) {
-    console.log(choice === this.currentWord.key);
+    return choice === this.currentWord.key;
   }
 
   enableNextButton() {}
