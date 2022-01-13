@@ -2,6 +2,7 @@ const words = {
   apple: {
     image: "/images/apple.png",
     text: { en: "Apple", ptbr: "Maçã" },
+    key: "apple",
   },
   broccoli: {
     image: "/images/broccoli.png",
@@ -10,34 +11,42 @@ const words = {
   carrot: {
     image: "/images/carrot.png",
     text: { en: "Carrot", ptbr: "Cenoura" },
+    key: "carrot",
   },
   corn: {
     image: "/images/corn.png",
     text: { en: "Corn", ptbr: "Milho" },
+    key: "corn",
   },
   garlic: {
     image: "/images/garlic.png",
     text: { en: "Garlic", ptbr: "Alho" },
+    key: "garlic",
   },
   mushroom: {
     image: "/images/mushroom.png",
     text: { en: "Mushroom", ptbr: "Cogumelo" },
+    key: "mushroom",
   },
   potato: {
     image: "/images/potato.png",
     text: { en: "Potato", ptbr: "Batata" },
+    key: "potato",
   },
   pumpkin: {
     image: "/images/pumpkin.png",
     text: { en: "Pumpkin", ptbr: "Abóbora" },
+    key: "pumpkin",
   },
   tomato: {
     image: "/images/tomato.png",
     text: { en: "Tomato", ptbr: "Tomate" },
+    key: "tomato",
   },
   tree: {
     image: "/images/tree.png",
     text: { en: "Tree", ptbr: "Árvore" },
+    key: "tree",
   },
 };
 
@@ -92,7 +101,7 @@ class Card {
 
     for (let word of wordArray) {
       options.innerHTML += `
-        <img class="option" id="${word.text.en}" src="${word.image}" alt="${word.text.en}" >
+        <img class="option" id="${word.key}" src="${word.image}" alt="${word.text.en}" >
       `;
       n++;
     }
@@ -115,7 +124,7 @@ class Card {
   revealAnswer() {}
 
   validateChoice(choice) {
-    console.log(choice === this.currentWord.text.en);
+    console.log(choice === this.currentWord.key);
   }
 
   enableNextButton() {}
