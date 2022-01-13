@@ -40,3 +40,43 @@ const words = {
     text: { en: "Tree", ptbr: "Árvore" },
   },
 };
+
+class Card {
+  constructor(words) {
+    this.words = words;
+    this.wordDiscard = [];
+    this.results = {
+      correct: 0,
+      wrong: 0,
+      skipped: 0,
+    };
+  }
+
+  getWord() {
+    const wordsLength = Object.keys(this.words).length;
+    const wordsRemaining = Object.keys(this.words);
+    const randomPick = Math.floor(Math.random() * wordsLength);
+    return wordsRemaining[randomPick];
+  }
+
+  discard(word) {
+    this.wordDiscard[word] = this.words[word];
+    delete this.words[word];
+
+    return word;
+  }
+
+  revealAnswer() {}
+
+  validateChoice() {}
+
+  enableNextButton() {}
+
+  skip() {}
+
+  next() {}
+
+  showResults() {}
+}
+
+card = new Card(words);
