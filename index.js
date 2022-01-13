@@ -76,7 +76,9 @@ class Card {
     let choices = this.pickWords(3);
     choices.push(this.currentWord);
 
-    card.showOptions(choices);
+    const shuffledChoices = choices.sort(() => Math.random() - 0.5);
+
+    card.showOptions(shuffledChoices);
   }
 
   pickWords(qty) {
