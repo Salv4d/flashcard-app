@@ -50,6 +50,52 @@ class Card {
       wrong: 0,
       skipped: 0,
     };
+    this.currentWord = {};
+  }
+
+  new() {
+    const wordPick = this.getWord();
+    const word = this.words[wordPick];
+    this.discard(wordPick);
+    this.currentWord = word;
+  }
+
+  showCard() {
+    const cardWord = document.querySelector("#card-word");
+    cardWord.innerText = this.currentWord.text.en;
+
+    let choices = this.pickWords(3);
+    choices.push(this.currentWord);
+
+    card.showOptions(choices);
+  }
+
+  pickWords(qty) {
+    const remainingWords = Object.keys(this.words);
+    let choices = [];
+    let num = 0;
+    let word = "";
+
+    for (let i = 0; i < qty; i++) {
+      num = Math.floor(Math.random() * remainingWords.length);
+      word = remainingWords[num];
+      remainingWords.splice(num, 1);
+      choices.push(this.words[word]);
+    }
+    return choices;
+  }
+
+  showOptions(wordArray) {
+    const options = document.querySelector("#options");
+
+    let n = 0;
+
+    for (let word of wordArray) {
+      options.innerHTML += `
+        <img class="option" id="${word.text.en}" src="${word.image}" alt="${word.text.en}" >
+      `;
+      n++;
+    }
   }
 
   getWord() {
@@ -68,7 +114,9 @@ class Card {
 
   revealAnswer() {}
 
-  validateChoice() {}
+  validateChoice(choice) {
+    console.log(choice === this.currentWord.text.en);
+  }
 
   enableNextButton() {}
 
@@ -80,3 +128,13 @@ class Card {
 }
 
 card = new Card(words);
+
+card.showCard(card.new());
+
+const options = document.querySelectorAll(".option");
+
+for (let option of options) {
+  option.addEventListener("click", function (e) {
+    card.validateChoice(this.id);
+  });
+}
