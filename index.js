@@ -7,6 +7,7 @@ const words = {
   broccoli: {
     image: "/images/broccoli.png",
     text: { en: "Broccoli", ptbr: "Brócolis" },
+    key: "broccoli",
   },
   carrot: {
     image: "/images/carrot.png",
@@ -80,6 +81,9 @@ class Card {
     const shuffledChoices = choices.sort(() => Math.random() - 0.5);
 
     card.showOptions(shuffledChoices);
+
+    document.querySelector("#next").hidden = true;
+    document.querySelector("#skip").hidden = false;
   }
 
   pickWords(qty) {
@@ -101,12 +105,32 @@ class Card {
     const options = document.querySelector("#options");
 
     let n = 0;
+    let el;
 
     for (let word of wordArray) {
       options.innerHTML += `
         <img class="option" id="${word.key}" src="${word.image}" alt="${word.text.en}" >
       `;
       n++;
+    }
+
+    const choices = document.querySelectorAll(".option");
+
+    for (let choice of choices) {
+      choice.addEventListener("click", (e) => {
+        const { target } = e;
+
+        if (this.correctAnswer(target.id)) {
+          this.results.correct++;
+        } else {
+          this.results.wrong++;
+          this.revealAnswer();
+          target.classList.toggle("wrong");
+        }
+
+        this.showNext();
+        console.log(this.results);
+      });
     }
   }
 
@@ -133,14 +157,17 @@ class Card {
     return choice === this.currentWord.key;
   }
 
-  enableNextButton() {}
-
   skip() {
     this.results.skipped++;
     this.new();
   }
 
   next() {}
+
+  showNext() {
+    document.querySelector("#next").hidden = false;
+    document.querySelector("#skip").hidden = true;
+  }
 
   showResults() {}
 }
@@ -149,18 +176,10 @@ card = new Card(words);
 
 card.new();
 
-const options = document.querySelectorAll(".option");
+// const options = document.querySelectorAll(".option");
 
-for (let option of options) {
-  option.addEventListener("click", function (e) {
-    if (card.correctAnswer(this.id)) {
-      card.results.correct++;
-    } else {
-      card.results.wrong++;
-      card.revealAnswer();
-      this.classList.toggle("wrong");
-    }
+// for (let option of options) {
+//   option.addEventListener("click", function (e) {
 
-    console.log(card.results);
-  });
-}
+//   });
+// }
