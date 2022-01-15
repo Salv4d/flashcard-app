@@ -194,12 +194,3 @@ const skipButton = document.querySelector("#skip");
 card = new Card(words, nextButton, revealButton, skipButton);
 
 card.new();
-
-// nextButton.addEventListener("click", card.new);
-// const options = document.querySelectorAll(".option");
-
-// for (let option of options) {
-//   option.addEventListener("click", function (e) {
-
-//   });
-// }
