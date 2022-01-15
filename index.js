@@ -52,8 +52,12 @@ const words = {
 };
 
 class Card {
-  constructor(words) {
+  constructor(words, nextButton, revealButton, skipButton) {
     this.words = words;
+    this.nextButton = nextButton;
+    this.revealButton = revealButton;
+    this.skipButton = skipButton;
+
     this.wordDiscard = [];
     this.results = {
       correct: 0,
@@ -61,15 +65,19 @@ class Card {
       skipped: 0,
     };
     this.currentWord = {};
+
+    this.nextButton.addEventListener("click", this.new);
+    this.skipButton.addEventListener("click", this.skip);
+    this.revealButton.addEventListener("click", this.revealAnswer);
   }
 
-  new() {
+  new = () => {
     const wordPick = this.getWord();
     const word = this.words[wordPick];
     this.discard(wordPick);
     this.currentWord = word;
     this.showCard();
-  }
+  };
 
   showCard() {
     const cardWord = document.querySelector("#card-word");
@@ -104,35 +112,36 @@ class Card {
   showOptions(wordArray) {
     const options = document.querySelector("#options");
 
-    let n = 0;
-    let el;
+    options.innerHTML = "";
 
     for (let word of wordArray) {
       options.innerHTML += `
         <img class="option" id="${word.key}" src="${word.image}" alt="${word.text.en}" >
       `;
-      n++;
     }
 
     const choices = document.querySelectorAll(".option");
 
     for (let choice of choices) {
-      choice.addEventListener("click", (e) => {
-        const { target } = e;
-
-        if (this.correctAnswer(target.id)) {
-          this.results.correct++;
-        } else {
-          this.results.wrong++;
-          this.revealAnswer();
-          target.classList.toggle("wrong");
-        }
-
-        this.showNext();
-        console.log(this.results);
-      });
+      choice.addEventListener("click", this.interactionHandler);
     }
   }
+
+  interactionHandler = (e) => {
+    const { target } = e;
+
+    if (this.correctAnswer(target.id)) {
+      this.results.correct++;
+    } else {
+      this.results.wrong++;
+      target.classList.toggle("wrong");
+    }
+
+    this.disableChoices();
+    this.revealAnswer();
+    this.showNext();
+    console.log(this.results);
+  };
 
   getWord() {
     const wordsLength = Object.keys(this.words).length;
@@ -148,21 +157,27 @@ class Card {
     return word;
   }
 
-  revealAnswer() {
+  revealAnswer = () => {
     const correctWord = document.querySelector(`#${this.currentWord.key}`);
     correctWord.classList.add("correct");
-  }
+  };
 
   correctAnswer(choice) {
     return choice === this.currentWord.key;
   }
 
-  skip() {
-    this.results.skipped++;
-    this.new();
+  disableChoices() {
+    const choices = document.querySelectorAll(".option");
+
+    for (let choice of choices) {
+      choice.removeEventListener("click", this.interactionHandler);
+    }
   }
 
-  next() {}
+  skip = () => {
+    this.results.skipped++;
+    this.new();
+  };
 
   showNext() {
     document.querySelector("#next").hidden = false;
@@ -172,10 +187,15 @@ class Card {
   showResults() {}
 }
 
-card = new Card(words);
+const nextButton = document.querySelector("#next");
+const revealButton = document.querySelector("#reveal");
+const skipButton = document.querySelector("#skip");
+
+card = new Card(words, nextButton, revealButton, skipButton);
 
 card.new();
 
+// nextButton.addEventListener("click", card.new);
 // const options = document.querySelectorAll(".option");
 
 // for (let option of options) {
