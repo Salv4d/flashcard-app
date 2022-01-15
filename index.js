@@ -95,16 +95,18 @@ class Card {
   }
 
   pickWords(qty) {
-    const remainingWords = Object.keys(this.words);
+    let allWords = Object.assign({}, this.words, this.wordDiscard);
+    delete allWords[this.currentWord.key];
+    const wordKeyList = Object.keys(allWords);
     let choices = [];
     let num = 0;
     let word = "";
 
     for (let i = 0; i < qty; i++) {
-      num = Math.floor(Math.random() * remainingWords.length);
-      word = remainingWords[num];
-      remainingWords.splice(num, 1);
-      choices.push(this.words[word]);
+      num = Math.floor(Math.random() * wordKeyList.length);
+      word = wordKeyList[num];
+      wordKeyList.splice(num, 1);
+      choices.push(allWords[word]);
     }
     return choices;
   }
