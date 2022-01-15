@@ -10,6 +10,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  transition: 500ms;
 }
 
 header {
@@ -132,6 +133,15 @@ button {
 button:hover {
   background-color: #ffeab1;
   cursor: pointer;
+}
+
+#next {
+  background-color: #8ce789;
+  border-color: #6cc569;
+}
+#next:hover {
+  background-color: #45f53e;
+  border-color: #6cc569;
 }
 
 footer {
