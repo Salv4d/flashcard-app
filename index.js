@@ -52,11 +52,12 @@ const words = {
 };
 
 class Card {
-  constructor(words, nextButton, revealButton, skipButton) {
+  constructor(words, nextButton, revealButton, skipButton, resultCard) {
     this.words = words;
     this.nextButton = nextButton;
     this.revealButton = revealButton;
     this.skipButton = skipButton;
+    this.resultCard = resultCard;
 
     this.wordDiscard = [];
     this.results = {
@@ -72,16 +73,22 @@ class Card {
   }
 
   new = () => {
+    this.resultCard.style.visibility = "hidden";
+    this.resultCard.style.left = "-10000px";
     const wordPick = this.getWord();
     const word = this.words[wordPick];
     this.discard(wordPick);
     this.currentWord = word;
+
+    document.querySelector("#result-img").src = this.currentWord.image;
+
     this.showCard();
   };
 
   showCard() {
-    const cardWord = document.querySelector("#card-word");
-    cardWord.innerText = this.currentWord.text.en;
+    const cardWord = document.querySelectorAll(".card-word");
+    cardWord[0].innerText = this.currentWord.text.en;
+    cardWord[1].innerText = this.currentWord.text.ptbr;
 
     let choices = this.pickWords(3);
     choices.push(this.currentWord);
@@ -134,13 +141,14 @@ class Card {
 
     if (this.correctAnswer(target.id)) {
       this.results.correct++;
+      this.revealAnswer("correct");
     } else {
       this.results.wrong++;
       target.classList.toggle("wrong");
+      this.revealAnswer("wrong");
     }
 
     this.disableChoices();
-    this.revealAnswer();
     this.showNext();
     console.log(this.results);
   };
@@ -159,9 +167,26 @@ class Card {
     return word;
   }
 
-  revealAnswer = () => {
-    const correctWord = document.querySelector(`#${this.currentWord.key}`);
-    correctWord.classList.add("correct");
+  revealAnswer = (type) => {
+    this.resultCard.style.left = "0";
+    this.resultCard.style.visibility = "visible";
+
+    switch (type) {
+      case "correct":
+        this.resultCard.children["result-type"].innerText = "Correct!";
+        this.resultCard.children["result-type"].className = "correct";
+        break;
+
+      case "wrong":
+        this.resultCard.children["result-type"].innerText = "Wrong!";
+        this.resultCard.children["result-type"].className = "wrong";
+        break;
+
+      default:
+        this.resultCard.children["result-type"].innerText = "";
+        this.resultCard.children["result-type"].className = "";
+        break;
+    }
   };
 
   correctAnswer(choice) {
@@ -192,7 +217,8 @@ class Card {
 const nextButton = document.querySelector("#next");
 const revealButton = document.querySelector("#reveal");
 const skipButton = document.querySelector("#skip");
+const resultCard = document.querySelector("#result");
 
-card = new Card(words, nextButton, revealButton, skipButton);
+card = new Card(words, nextButton, revealButton, skipButton, resultCard);
 
 card.new();

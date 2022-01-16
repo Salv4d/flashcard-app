@@ -44,6 +44,7 @@ main {
 
 #card {
   display: grid;
+  position: relative;
   grid-template-rows: 2;
   grid-template-columns: 1;
   align-items: start;
@@ -63,7 +64,7 @@ main {
   box-sizing: border-box;
 }
 
-#card-word {
+.card-word {
   overflow-x: hidden;
   grid-column: 1 / 2;
   grid-row: 1;
@@ -102,6 +103,36 @@ main {
 .correct,
 .correct:hover {
   background-color: rgb(163, 219, 163);
+}
+
+#result {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backdrop-filter: blur(4px);
+  visibility: hidden;
+}
+
+#result > h2 {
+  font-size: 3em;
+}
+
+#result-img {
+  width: 8em;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #ffffff;
+  transition: 500ms;
+}
+
+#result-type {
+  padding: 15px;
+  border-radius: 15px;
 }
 
 #options {
