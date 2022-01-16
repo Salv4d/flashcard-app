@@ -122,6 +122,22 @@ main {
   font-size: 3em;
 }
 
+#result > ul {
+  font-size: 15pt;
+  text-align: end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#result > p {
+  text-shadow: 0px 0px 2px #ffffff, 0px 0px 2px #ffffff;
+}
+
+.result-num {
+  text-align: center;
+}
+
 #result-img {
   width: 8em;
   border-radius: 10px;
@@ -133,6 +149,41 @@ main {
 #result-type {
   padding: 15px;
   border-radius: 15px;
+}
+
+.result-cat {
+  text-align: right;
+}
+
+table {
+  border: 1px solid rgb(151, 151, 151);
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+td {
+  font-size: 2.5em;
+}
+
+#correct-points {
+  color: #06ac00;
+}
+
+#wrong-points {
+  color: #ff0000;
+}
+
+#try-again {
+  background-color: #8ce789;
+  border-color: #6cc569;
+  color: #195700;
+}
+
+#try-again:hover {
+  background-color: #9cff99;
+  color: #195700;
 }
 
 #options {

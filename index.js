@@ -69,10 +69,14 @@ class Card {
 
     this.nextButton.addEventListener("click", this.new);
     this.skipButton.addEventListener("click", this.skip);
-    this.revealButton.addEventListener("click", this.revealAnswer);
+    this.revealButton.addEventListener("click", this.reveal);
   }
 
   new = () => {
+    if (Object.keys(this.words).length === 0) {
+      return this.showResults();
+    }
+
     this.resultCard.style.visibility = "hidden";
     this.resultCard.style.left = "-10000px";
     const wordPick = this.getWord();
@@ -80,15 +84,12 @@ class Card {
     this.discard(wordPick);
     this.currentWord = word;
 
-    document.querySelector("#result-img").src = this.currentWord.image;
-
     this.showCard();
   };
 
   showCard() {
-    const cardWord = document.querySelectorAll(".card-word");
-    cardWord[0].innerText = this.currentWord.text.en;
-    cardWord[1].innerText = this.currentWord.text.ptbr;
+    const cardWord = document.querySelector(".card-word");
+    cardWord.innerText = this.currentWord.text.en;
 
     let choices = this.pickWords(3);
     choices.push(this.currentWord);
@@ -150,7 +151,6 @@ class Card {
 
     this.disableChoices();
     this.showNext();
-    console.log(this.results);
   };
 
   getWord() {
@@ -170,6 +170,12 @@ class Card {
   revealAnswer = (type) => {
     this.resultCard.style.left = "0";
     this.resultCard.style.visibility = "visible";
+    this.resultCard.innerHTML = `
+      <h2 id="result-type"></h2>
+      <h3>The word was:</h3>
+      <h2 class="card-word">${this.currentWord.text.ptbr}</h2>
+      <img id="result-img" src="${this.currentWord.image}" alt="${this.currentWord.text.en}" />
+    `;
 
     switch (type) {
       case "correct":
@@ -206,12 +212,50 @@ class Card {
     this.new();
   };
 
+  reveal = () => {
+    this.results.skipped++;
+    this.reveal();
+  };
+
   showNext() {
     document.querySelector("#next").hidden = false;
     document.querySelector("#skip").hidden = true;
   }
 
-  showResults() {}
+  showResults = () => {
+    this.resultCard.style.left = "0";
+    this.resultCard.style.visibility = "visible";
+
+    this.resultCard.innerHTML = `
+    <p>Game finished!</p>
+    <h2 id="result-type">Results</h2>
+    <table>
+    <tr id="correct-points">
+        <td class="result-cat">Correct &#10004;</td>
+        <td class="result-num" id="correct-num">5</td>
+    </tr>
+    <tr id="wrong-points">
+        <td class="result-cat">Wrong &#10006; </td>
+        <td class="result-num" id="wrong-num">3</td>
+    </tr>
+    <tr id="skipped-points">
+        <td class="result-cat">Skipped \\ </td>
+        <td class="result-num" id="skipped-num">1</td>
+    </tr>
+    </table>
+    <button id="try-again">Try Again</button>
+    `;
+
+    this.resultCard.children["try-again"].addEventListener(
+      "click",
+      this.tryAgain
+    );
+    document.querySelector("#game-options").innerHTML = "";
+  };
+
+  tryAgain() {
+    location.reload();
+  }
 }
 
 const nextButton = document.querySelector("#next");
