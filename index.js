@@ -232,15 +232,15 @@ class Card {
     <table>
     <tr id="correct-points">
         <td class="result-cat">Correct &#10004;</td>
-        <td class="result-num" id="correct-num">5</td>
+        <td class="result-num" id="correct-num">${this.results.correct}</td>
     </tr>
     <tr id="wrong-points">
         <td class="result-cat">Wrong &#10006; </td>
-        <td class="result-num" id="wrong-num">3</td>
+        <td class="result-num" id="wrong-num">${this.results.wrong}</td>
     </tr>
     <tr id="skipped-points">
         <td class="result-cat">Skipped \\ </td>
-        <td class="result-num" id="skipped-num">1</td>
+        <td class="result-num" id="skipped-num">${this.results.skipped}</td>
     </tr>
     </table>
     <button id="try-again">Try Again</button>
