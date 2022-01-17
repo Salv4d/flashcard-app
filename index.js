@@ -1,51 +1,51 @@
 const words = {
   apple: {
-    image: "/images/apple.png",
+    image: "./images/apple.png",
     text: { en: "Apple", ptbr: "Maçã" },
     key: "apple",
   },
   broccoli: {
-    image: "/images/broccoli.png",
+    image: "./images/broccoli.png",
     text: { en: "Broccoli", ptbr: "Brócolis" },
     key: "broccoli",
   },
   carrot: {
-    image: "/images/carrot.png",
+    image: "./images/carrot.png",
     text: { en: "Carrot", ptbr: "Cenoura" },
     key: "carrot",
   },
   corn: {
-    image: "/images/corn.png",
+    image: "./images/corn.png",
     text: { en: "Corn", ptbr: "Milho" },
     key: "corn",
   },
   garlic: {
-    image: "/images/garlic.png",
+    image: "./images/garlic.png",
     text: { en: "Garlic", ptbr: "Alho" },
     key: "garlic",
   },
   mushroom: {
-    image: "/images/mushroom.png",
+    image: "./images/mushroom.png",
     text: { en: "Mushroom", ptbr: "Cogumelo" },
     key: "mushroom",
   },
   potato: {
-    image: "/images/potato.png",
+    image: "./images/potato.png",
     text: { en: "Potato", ptbr: "Batata" },
     key: "potato",
   },
   pumpkin: {
-    image: "/images/pumpkin.png",
+    image: "./images/pumpkin.png",
     text: { en: "Pumpkin", ptbr: "Abóbora" },
     key: "pumpkin",
   },
   tomato: {
-    image: "/images/tomato.png",
+    image: "./images/tomato.png",
     text: { en: "Tomato", ptbr: "Tomate" },
     key: "tomato",
   },
   tree: {
-    image: "/images/tree.png",
+    image: "./images/tree.png",
     text: { en: "Tree", ptbr: "Árvore" },
     key: "tree",
   },
