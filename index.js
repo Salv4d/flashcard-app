@@ -49,6 +49,81 @@ const words = {
     text: { en: "Tree", ptbr: "Árvore" },
     key: "tree",
   },
+  barrel: {
+    image: "./images/barrel.png",
+    text: { en: "Barrel", ptbr: "Barril" },
+    key: "tree",
+  },
+  bee: {
+    image: "./images/bee.png",
+    text: { en: "Bee", ptbr: "Abelha" },
+    key: "bee",
+  },
+  cow: {
+    image: "./images/cow.png",
+    text: { en: "Cow", ptbr: "Vaca" },
+    key: "cow",
+  },
+  farmer: {
+    image: "./images/farmer.png",
+    text: { en: "Farmer", ptbr: "Fazendeira" },
+    key: "farmer",
+  },
+  fence: {
+    image: "./images/fence.png",
+    text: { en: "Fence", ptbr: "Cerca" },
+    key: "fence",
+  },
+  log: {
+    image: "./images/log.png",
+    text: { en: "Log", ptbr: "Tora" },
+    key: "log",
+  },
+  pig: {
+    image: "./images/pig.png",
+    text: { en: "Pig", ptbr: "Porco" },
+    key: "pig",
+  },
+  rabbit: {
+    image: "./images/rabbit.png",
+    text: { en: "Rabbit", ptbr: "Coelho" },
+    key: "rabbit",
+  },
+  scarecrow: {
+    image: "./images/scarecrow.png",
+    text: { en: "Scarecrow", ptbr: "Espantalho" },
+    key: "scarecrow",
+  },
+  sheep: {
+    image: "./images/sheep.png",
+    text: { en: "Sheep", ptbr: "Ovelha" },
+    key: "sheep",
+  },
+  shovel: {
+    image: "./images/shovel.png",
+    text: { en: "Shovel", ptbr: "Pá" },
+    key: "shovel",
+  },
+  sweetpotato: {
+    image: "./images/sweet-potato.png",
+    text: { en: "Sweet Potato", ptbr: "Batata Doce" },
+    key: "sweetpotato",
+  },
+  tractor: {
+    image: "./images/tractor.png",
+    text: { en: "Tractor", ptbr: "Trator" },
+    key: "tractor",
+  },
+  wateringcan: {
+    image: "./images/watering-can.png",
+    text: { en: "Watering Can", ptbr: "Regador" },
+    key: "wateringcan",
+  },
+  windmill: {
+    image: "./images/windmill.png",
+    text: { en: "Windmill", ptbr: "Moinho de Vento" },
+    key: "windmill",
+  },
 };
 
 class Card {
