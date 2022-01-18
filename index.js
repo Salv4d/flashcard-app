@@ -289,7 +289,7 @@ class Card {
 
   reveal = () => {
     this.results.skipped++;
-    this.reveal();
+    this.revealAnswer();
   };
 
   showNext() {
